@@ -1,6 +1,6 @@
 {
   "name": "no-async",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A 39-line package that offers `series()` or `parallel()`.",
   "main": "index.js",
   "scripts": {
