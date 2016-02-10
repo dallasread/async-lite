@@ -1,0 +1,24 @@
+{
+  "name": "async-lite",
+  "version": "1.0.0",
+  "description": "A 39-line package that offers `series()` or `parallel()`.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dallasread/async-lite.git"
+  },
+  "keywords": [
+    "async",
+    "series",
+    "parallel"
+  ],
+  "author": "Dallas Read",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dallasread/async-lite/issues"
+  },
+  "homepage": "https://github.com/dallasread/async-lite#readme"
+}
