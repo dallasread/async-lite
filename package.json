@@ -1,6 +1,6 @@
 {
-  "name": "async-lite",
-  "version": "1.0.0",
+  "name": "no-async",
+  "version": "1.0.1",
   "description": "A 39-line package that offers `series()` or `parallel()`.",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dallasread/async-lite.git"
+    "url": "git+https://github.com/dallasread/no-async.git"
   },
   "keywords": [
     "async",
@@ -18,7 +18,7 @@
   "author": "Dallas Read",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/dallasread/async-lite/issues"
+    "url": "https://github.com/dallasread/no-async/issues"
   },
-  "homepage": "https://github.com/dallasread/async-lite#readme"
+  "homepage": "https://github.com/dallasread/no-async#readme"
 }

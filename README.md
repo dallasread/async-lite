@@ -1,8 +1,9 @@
 A 39-line, no-dependencies package that offers `series()` and `parallel()`.
 
-var AsyncLite = require('async-lite');
+```
+var NoAsync = require('no-async');
 
-AsyncLite.series([
+NoAsync.series([
     function(next) { next(null, 123); },
     function(next) { next(null, 456); },
     function(next) { next(null, 789); }
@@ -12,7 +13,7 @@ AsyncLite.series([
     }
 });
 
-AsyncLite.parallel([
+NoAsync.parallel([
     function(next) { next(null, 123); },
     function(next) { next(null, 456); },
     function(next) { next(null, 789); }
@@ -21,3 +22,4 @@ AsyncLite.parallel([
         throw new Error('Failed test #2;');
     }
 });
+```

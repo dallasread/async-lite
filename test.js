@@ -1,6 +1,6 @@
-var AsyncLite = require('./');
+var NoAsync = require('./');
 
-AsyncLite.series([
+NoAsync.series([
     function(next) { next(null, 123); },
     function(next) { next(null, 456); },
     function(next) { next(null, 789); }
@@ -10,7 +10,7 @@ AsyncLite.series([
     }
 });
 
-AsyncLite.parallel([
+NoAsync.parallel([
     function(next) { next(null, 123); },
     function(next) { next(null, 456); },
     function(next) { next(null, 789); }
