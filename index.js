@@ -16,21 +16,21 @@ function parallel(funcs, done) {
 }
 
 function series(funcs, done) {
-    function performNextFunc(i, data) {
-        var func = funcs[i];
+    function performNextFunc(data) {
+        var func = funcs.shift();
 
         if (typeof func === 'function') {
             func(function(err, newData) {
-                if (err) return done(err, responses);
+                if (err) return done(err, newData);
 
-                performNextFunc(i + 1, newData);
+                performNextFunc(newData);
             });
         } else {
             done(null, data);
         }
     }
 
-    performNextFunc(0);
+    performNextFunc();
 }
 
 module.exports = {
