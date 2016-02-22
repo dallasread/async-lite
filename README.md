@@ -1,4 +1,4 @@
-*Note: In 1.1.0, the second argument of `series()` now returns `arrayOfResponses` instead of `lastResponse`.*
+*Note: At v1.1.0, the second argument of `series()` now returns `arrayOfResponses` instead of `lastResponse`.*
 
 A 57-line, no-dependencies package that offers `series(funcs, done)`, `parallel(funcs, done)`, `eachSeries(arr, func, done)`, and `eachParallel(arr, func, done)`.
 
@@ -6,35 +6,34 @@ A 57-line, no-dependencies package that offers `series(funcs, done)`, `parallel(
 var NoAsync = require('no-async');
 
 NoAsync.series([
-    function(next) { next(null); },
-    function(next) { next(null); },
-    function(next) { next(null, 789); }
+    function(next) { next(null, 1); },
+    function(next) { next(null, 2); },
+    function(next) { next(null, 3); }
 ], function seriesComplete(err, arrayOfResponses) {
-    // Handle complete
+    console.log(arrayOfResponses.toString() === [1, 2, 3].toString()); // true
 });
 
 NoAsync.parallel([
-    function(next) { next(null, 123); },
-    function(next) { next(null, 456); },
-    function(next) { next(null, 789); }
+    function(next) { next(null, 1); },
+    function(next) { next(null, 2); },
+    function(next) { next(null, 3); }
 ], function parallelComplete(err, arrayOfResponses) {
-    // Handle complete
+    console.log(arrayOfResponses.toString() === [1, 2, 3].toString()); // true
 });
 
 NoAsync.eachSeries(
-    [1, 2, 3, 4, 5], // Array of items
+    [1, 2, 3], // Array of items
     function(i, next) { next(null, i); }, // Repeat Function
     function(err, arrayOfResponses) {
-        // Handle complete
-        console.log(arrayOfResponses === [1, 2, 3, 4, 5]); // true
+        console.log(arrayOfResponses.toString() === [1, 2, 3].toString()); // true
     }
 );
 
 NoAsync.eachParallel(
-    [1, 2, 3, 4, 5], // Array of items
+    [1, 2, 3], // Array of items
     function(i, next) { next(null, i); }, // Repeat Function
     function(err, arrayOfResponses) {
-        console.log(arrayOfResponses === [1, 2, 3, 4, 5]); // true
+        console.log(arrayOfResponses.toString() === [1, 2, 3].toString()); // true
     }
 );
 ```
