@@ -1,7 +1,7 @@
 {
   "name": "no-async",
-  "version": "1.0.4",
-  "description": "A 39-line package that offers `series()` or `parallel()`.",
+  "version": "1.1.0",
+  "description": "Powerful series, parallel, eachSeries, & eachParallel mechanisms in just 57 lines.",
   "main": "index.js",
   "scripts": {
     "test": "node test"
