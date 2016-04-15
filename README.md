@@ -1,5 +1,3 @@
-*Note: At v1.1.0, the second argument of `series()` now returns `arrayOfResponses` instead of `lastResponse`.*
-
 A 57-line, no-dependencies package that offers `series(funcs, done)`, `parallel(funcs, done)`, `eachSeries(arr, func, done)`, and `eachParallel(arr, func, done)`.
 
 ```
@@ -17,7 +15,7 @@ NoAsync.parallel([
     function(next) { next(null, 1); },
     function(next) { next(null, 2); },
     function(next) { next(null, 3); }
-], function parallelComplete(err, arrayOfResponses) {
+], function parallelComplete(arrayOfErrors, arrayOfResponses) {
     console.log(arrayOfResponses.toString() === [1, 2, 3].toString()); // true
 });
 
@@ -32,7 +30,7 @@ NoAsync.eachSeries(
 NoAsync.eachParallel(
     [1, 2, 3], // Array of items
     function(i, next) { next(null, i); }, // Repeat Function
-    function(err, arrayOfResponses) {
+    function(arrayOfErrors, arrayOfResponses) {
         console.log(arrayOfResponses.toString() === [1, 2, 3].toString()); // true
     }
 );
