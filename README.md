@@ -21,7 +21,7 @@ NoAsync.parallel([
 
 NoAsync.eachSeries(
     [1, 2, 3], // Array of items
-    function(i, next) { next(null, i); }, // Repeat Function
+    function(item, next) { next(null, item); }, // Repeat Function
     function(err, arrayOfResponses) {
         console.log(arrayOfResponses.toString() === [1, 2, 3].toString()); // true
     }
@@ -29,7 +29,7 @@ NoAsync.eachSeries(
 
 NoAsync.eachParallel(
     [1, 2, 3], // Array of items
-    function(i, next) { next(null, i); }, // Repeat Function
+    function(item, next) { next(null, item); }, // Repeat Function
     function(arrayOfErrors, arrayOfResponses) {
         console.log(arrayOfResponses.toString() === [1, 2, 3].toString()); // true
     }
