@@ -1,7 +1,11 @@
 var NoAsync = require('./');
 
-function arrEquals(a, b) {
-    return a.toString() === b.toString();
+function testEquals(name, a, b) {
+    if (a.toString() === b.toString()) {
+        console.log('√ – ' + name);
+    } else {
+        console.error('x – ' + name);
+    }
 }
 
 NoAsync.series([
@@ -9,39 +13,45 @@ NoAsync.series([
     function(next) { next(null, 2); },
     function(next) { next(null, 3); }
 ], function seriesComplete(err, arrayOfResponses) {
-    if (arrayOfResponses.toString() !== [1, 2, 3].toString()) {
-        throw new Error('Test #1 Failed.');
-    }
+    testEquals('series', arrayOfResponses, [1, 2, 3]);
 });
 
 NoAsync.parallel([
     function(next) { next(null, 1); },
     function(next) { next(null, 2); },
     function(next) { next(null, 3); }
-], function parallelComplete(err, arrayOfResponses) {
-    if (arrayOfResponses.toString() !== [1, 2, 3].toString()) {
-        throw new Error('Test #2 Failed.');
-    }
+], function parallelComplete(arrayOfErrors, arrayOfResponses) {
+    testEquals('parallel', arrayOfResponses, [1, 2, 3]);
 });
 
 NoAsync.eachSeries(
     [1, 2, 3],
     function(i, next) { next(null, i); },
-    function(err, arrayOfResponses) {
-        if (arrayOfResponses.toString() !== [1, 2, 3].toString()) {
-            throw new Error('Test #3 Failed.');
-        }
+    function eachSeriesComplete(err, arrayOfResponses) {
+        testEquals('eachSeries', arrayOfResponses, [1, 2, 3]);
     }
 );
 
 NoAsync.eachParallel(
     [1, 2, 3],
     function(i, next) { next(null, i); },
-    function(err, arrayOfResponses) {
-        if (arrayOfResponses.toString() !== [1, 2, 3].toString()) {
-            throw new Error('Test #4 Failed.');
-        }
+    function eachParallelComplete(arrayOfErrors, arrayOfResponses) {
+        testEquals('eachParallel', arrayOfResponses, [1, 2, 3]);
     }
 );
 
-console.log('All tests passed!');
+NoAsync.eachParallel(
+    { 1: 'one', 2: 'two', 3: 'three' },
+    function(key, value, next) { next(null, [key, value]); },
+    function eachParallelObjectComplete(arrayOfErrors, arrayOfResponses) {
+        testEquals('eachParallelObject', arrayOfResponses, [[1, 'one'], [2, 'two'], [3, 'three']]);
+    }
+);
+
+NoAsync.eachSeries(
+    { 1: 'one', 2: 'two', 3: 'three' },
+    function(key, value, next) { next(null, [key, value]); },
+    function eachSeriesObjectComplete(arrayOfErrors, arrayOfResponses) {
+        testEquals('eachSeriesObject', arrayOfResponses, [[1, 'one'], [2, 'two'], [3, 'three']]);
+    }
+);

@@ -35,3 +35,22 @@ NoAsync.eachParallel(
     }
 );
 ```
+
+You can even pass in an object:
+```
+NoAsync.eachParallel(
+    { 1: 'one', 2: 'two', 3: 'three' },
+    function(key, value, next) { next(null, [key, value]); },
+    function(arrayOfErrors, arrayOfResponses) {
+        console.log(arrayOfResponses.toString() === [[1, 'one'], [2, 'two'], [3, 'three']].toString()); // true
+    }
+);
+
+NoAsync.eachSeries(
+    { 1: 'one', 2: 'two', 3: 'three' },
+    function(key, value, next) { next(null, [key, value]); },
+    function(err, arrayOfResponses) {
+        console.log(arrayOfResponses.toString() === [[1, 'one'], [2, 'two'], [3, 'three']].toString()); // true
+    }
+);
+```
