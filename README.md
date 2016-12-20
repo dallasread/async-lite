@@ -1,4 +1,4 @@
-A 57-line, no-dependencies package that offers `series(funcs, done)`, `parallel(funcs, done)`, `eachSeries(arr, func, done)`, and `eachParallel(arr, func, done)`.
+A 111-line, no-dependency package that offers `series(funcs, done)`, `parallel(funcs, done)`, `eachSeries(arrOrObj, func, done)`, and `eachParallel(arrOrObj, func, done)`.
 
 ```
 var NoAsync = require('no-async');
@@ -36,7 +36,7 @@ NoAsync.eachParallel(
 );
 ```
 
-You can even pass in an object:
+If you pass in an object to the `each` function, the iterator function gives you `key`, `value`, and `next` arguments:
 ```
 NoAsync.eachParallel(
     { 1: 'one', 2: 'two', 3: 'three' },
