@@ -40,18 +40,18 @@ NoAsync.eachParallel(
     }
 );
 
-NoAsync.eachParallel(
-    { 1: 'one', 2: 'two', 3: 'three' },
-    function(key, value, next) { next(null, [key, value]); },
-    function eachParallelObjectComplete(arrayOfErrors, arrayOfResponses) {
-        testEquals('eachParallelObject', arrayOfResponses, [[1, 'one'], [2, 'two'], [3, 'three']]);
-    }
-);
-
 NoAsync.eachSeries(
     { 1: 'one', 2: 'two', 3: 'three' },
     function(key, value, next) { next(null, [key, value]); },
-    function eachSeriesObjectComplete(arrayOfErrors, arrayOfResponses) {
-        testEquals('eachSeriesObject', arrayOfResponses, [[1, 'one'], [2, 'two'], [3, 'three']]);
+    function eachObjectSeriesComplete(arrayOfErrors, arrayOfResponses) {
+        testEquals('eachObjectSeries', arrayOfResponses, [[1, 'one'], [2, 'two'], [3, 'three']]);
+    }
+);
+
+NoAsync.eachParallel(
+    { 1: 'one', 2: 'two', 3: 'three' },
+    function(key, value, next) { next(null, [key, value]); },
+    function eachObjectParallelComplete(arrayOfErrors, arrayOfResponses) {
+        testEquals('eachObjectParallel', arrayOfResponses, [[1, 'one'], [2, 'two'], [3, 'three']]);
     }
 );
