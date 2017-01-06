@@ -32,11 +32,27 @@ NoAsync.eachSeries(
     }
 );
 
+NoAsync.eachSeries(
+    [],
+    function(i, next) { next(null, i); },
+    function eachSeriesComplete(err, arrayOfResponses) {
+        testEquals('eachSeriesEmpty', arrayOfResponses, []);
+    }
+);
+
 NoAsync.eachParallel(
     [1, 2, 3],
     function(i, next) { next(null, i); },
     function eachParallelComplete(arrayOfErrors, arrayOfResponses) {
         testEquals('eachParallel', arrayOfResponses, [1, 2, 3]);
+    }
+);
+
+NoAsync.eachParallel(
+    [],
+    function(i, next) { next(null, i); },
+    function eachParallelComplete(arrayOfErrors, arrayOfResponses) {
+        testEquals('eachParallelEmpty', arrayOfResponses, []);
     }
 );
 
@@ -48,10 +64,26 @@ NoAsync.eachSeries(
     }
 );
 
+NoAsync.eachSeries(
+    {},
+    function(key, value, next) { next(null, [key, value]); },
+    function eachObjectSeriesComplete(arrayOfErrors, arrayOfResponses) {
+        testEquals('eachObjectSeriesEmpty', arrayOfResponses, []);
+    }
+);
+
 NoAsync.eachParallel(
     { 1: 'one', 2: 'two', 3: 'three' },
     function(key, value, next) { next(null, [key, value]); },
     function eachObjectParallelComplete(arrayOfErrors, arrayOfResponses) {
         testEquals('eachObjectParallel', arrayOfResponses, [[1, 'one'], [2, 'two'], [3, 'three']]);
+    }
+);
+
+NoAsync.eachParallel(
+    {},
+    function(key, value, next) { next(null, [key, value]); },
+    function eachObjectParallelComplete(arrayOfErrors, arrayOfResponses) {
+        testEquals('eachObjectParallelEmpty', arrayOfResponses, []);
     }
 );
